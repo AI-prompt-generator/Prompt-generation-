@@ -1,0 +1,361 @@
+
+categories:
+  - id: coding_agent
+    name: Coding Agents
+    description: Prompts for AI agents that write, debug, and optimize code
+    icon: 💻
+    templates:
+      - name: Full-Stack Developer Agent
+        description: Build complete web applications with frontend and backend
+        components:
+          - Role & Persona
+          - Tools
+          - Reasoning Style
+          - Constraints
+        sample: "You are an expert full-stack developer specializing in React, Node.js, and PostgreSQL. Your goal is to write clean, maintainable, production-ready code."
+      - name: Code Reviewer Agent
+        description: Review code for quality, security, and best practices
+        components:
+          - Role & Persona
+          - Review Criteria
+          - Output Format
+          - Safety Guidelines
+        sample: "You are a meticulous code reviewer focused on security, performance, and maintainability. Provide constructive feedback with specific examples."
+      - name: Debugging Assistant
+        description: Systematically identify and fix bugs
+        components:
+          - Role & Persona
+          - Problem Analysis
+          - Solution Approach
+          - Tool Usage
+        sample: "You are a debugging expert who systematically analyzes errors, identifies root causes, and proposes clear solutions."
+
+  - id: customer_support
+    name: Customer Support Agents
+    description: Prompts for AI agents that handle customer inquiries and support
+    icon: 💬
+    templates:
+      - name: Technical Support Agent
+        description: Help customers resolve technical issues
+        components:
+          - Role & Persona
+          - Tone & Style
+          - Escalation Rules
+          - Knowledge Base Access
+        sample: "You are a friendly technical support specialist who explains complex issues in simple terms. Always remain patient and empathetic."
+      - name: Sales Assistant
+        description: Guide customers through sales process
+        components:
+          - Role & Persona
+          - Product Knowledge
+          - Sales Approach
+          - Objection Handling
+        sample: "You are a consultative sales assistant who focuses on understanding customer needs and recommending appropriate solutions."
+
+  - id: research_agent
+    name: Research Agents
+    description: Prompts for AI agents that gather, analyze, and synthesize information
+    icon: 🔍
+    templates:
+      - name: Data Analyst Agent
+        description: Analyze data and generate insights
+        components:
+          - Role & Persona
+          - Analysis Methods
+          - Visualization
+          - Reporting Format
+        sample: "You are a data analyst specialized in statistical analysis and data visualization. Present findings clearly with supporting evidence."
+      - name: Market Research Agent
+        description: Conduct market analysis and competitive research
+        components:
+          - Role & Persona
+          - Research Methodology
+          - Sources
+          - Output Structure
+        sample: "You are a market research analyst who synthesizes information from multiple sources to provide actionable business insights."
+
+  - id: creative_agent
+    name: Creative Agents
+    description: Prompts for AI agents that generate creative content and designs
+    icon: 🎨
+    templates:
+      - name: Content Writer Agent
+        description: Create engaging written content
+        components:
+          - Role & Persona
+          - Writing Style
+          - SEO Optimization
+          - Tone Adaptation
+        sample: "You are a versatile content writer who adapts tone and style to audience needs while maintaining brand voice consistency."
+      - name: UI/UX Designer Agent
+        description: Design user interfaces and experiences
+        components:
+          - Role & Persona
+          - Design Principles
+          - User Research
+          - Feedback Integration
+        sample: "You are a UI/UX designer focused on creating accessible, intuitive interfaces that delight users."
+
+  - id: task_automation
+    name: Task Automation Agents
+    description: Prompts for AI agents that automate workflows and processes
+    icon: ⚙️
+    templates:
+      - name: Workflow Orchestrator
+        description: Coordinate complex multi-step processes
+        components:
+          - Role & Persona
+          - Task Sequencing
+          - Error Handling
+          - Status Reporting
+        sample: "You are a workflow automation specialist who ensures tasks execute in the correct order with proper error handling."
+      - name: Data Processing Agent
+        description: Transform and validate data
+        components:
+          - Role & Persona
+          - Processing Pipeline
+          - Validation Rules
+          - Output Format
+        sample: "You are a data processing agent that validates input, transforms data according to specifications, and produces structured output."
+
+prompt_components:
+  essential:
+    - name: Role & Persona
+      description: Define the agent's identity, expertise, and personality
+      importance: critical
+      example: "You are v0, an expert AI coding assistant specialized in React and Next.js"
+      tips:
+        - Be specific about expertise areas
+        - Define personality traits (friendly, formal, technical)
+        - Set clear boundaries of knowledge
+
+    - name: Goal & Objective
+      description: Specify the primary purpose and desired outcomes
+      importance: critical
+      example: "Your goal is to generate production-ready, accessible React components"
+      tips:
+        - State the main objective clearly
+        - Define success criteria
+        - Specify target outcomes
+
+    - name: Instructions
+      description: Clear, step-by-step operational guidelines
+      importance: critical
+      example: "1. Analyze user request 2. Select appropriate tools 3. Execute and wait 4. Submit results"
+      tips:
+        - Use numbered steps for clarity
+        - Be explicit about each action
+        - Define the agent loop structure
+
+    - name: Constraints & Guardrails
+      description: Boundaries, limitations, and safety measures
+      importance: critical
+      example: "Never execute destructive operations without explicit confirmation"
+      tips:
+        - List what the agent should NOT do
+        - Define safety checks
+        - Set ethical boundaries
+
+  advanced:
+    - name: Tool Definitions
+      description: Detailed specifications for available tools and APIs
+      importance: high
+      example: "execute_command: Use this to run CLI commands. Parameters: command (string), timeout (int)"
+      tips:
+        - Document each tool's purpose
+        - Specify input parameters
+        - Define expected outputs
+
+    - name: Context Management
+      description: How to handle conversation history and memory
+      importance: high
+      example: "Maintain context across interactions, referencing previous outputs when relevant"
+      tips:
+        - Specify what to remember
+        - Define context window usage
+        - Handle conversation resets
+
+    - name: Output Format
+      description: Structure and style for agent responses
+      importance: high
+      example: "Always return JSON with keys: status, result, next_action"
+      tips:
+        - Use consistent formatting
+        - Define schemas for structured output
+        - Specify markdown usage
+
+    - name: Examples (Few-Shot)
+      description: Sample inputs and expected outputs
+      importance: medium
+      example: "User: Create a button\nAssistant: Here's a semantic button component..."
+      tips:
+        - Provide 1-5 examples
+        - Show diverse scenarios
+        - Demonstrate desired format
+
+    - name: Reasoning Style
+      description: How the agent should approach problem-solving
+      importance: high
+      example: "Use chain-of-thought reasoning: think step-by-step before responding"
+      tips:
+        - Specify thinking methodology
+        - Encourage transparency
+        - Define reasoning depth
+
+    - name: Error Handling
+      description: How to manage failures and edge cases
+      importance: high
+      example: "If a tool fails, explain the error clearly and suggest alternatives"
+      tips:
+        - Define graceful degradation
+        - Specify error messages
+        - Provide recovery strategies
+
+best_practices:
+  - principle: Clarity Over Complexity
+    description: Use simple, direct language. Avoid ambiguous instructions.
+    impact: Reduces hallucinations and improves reliability
+    example: "Good: 'List all users' vs Bad: 'Maybe show some users if possible'"
+
+  - principle: Iterative Agent Loop
+    description: Define explicit steps - Analyze → Select Tool → Execute → Wait → Iterate
+    impact: Creates predictable, controllable agent behavior
+    example: "1. Analyze events 2. Select one tool 3. Wait for execution 4. Iterate 5. Submit results"
+
+  - principle: One Tool Per Turn
+    description: Limit agents to using one tool per interaction cycle
+    impact: Prevents cascading errors and improves debugging
+    example: "Choose ONLY one tool call per iteration. Wait for the result before proceeding."
+
+  - principle: Context Engineering
+    description: Provide complete context - system state, tool outputs, history
+    impact: Enables better decision-making and coherent behavior
+    example: "Include current directory, available files, previous errors in context"
+
+  - principle: Specificity Wins
+    description: Be extremely detailed about expected outcomes and formats
+    impact: Dramatically improves output quality and consistency
+    example: "Generate a React component with TypeScript, using functional components, hooks, and proper prop types"
+
+  - principle: Test With Edge Cases
+    description: Build evaluation datasets with success, edge, and failure scenarios
+    impact: Ensures robust performance in production
+    example: "Test with: normal inputs, empty data, malformed requests, timeout scenarios"
+
+techniques:
+  - name: Chain-of-Thought (CoT)
+    description: Encourage step-by-step reasoning before final output
+    use_case: Complex problem-solving, multi-step tasks
+    when_to_use: Tasks requiring logical reasoning or multiple steps
+    example: |
+      Think through this step-by-step:
+      1. First, identify the problem
+      2. Then, consider possible solutions
+      3. Finally, select the best approach
+
+  - name: ReAct (Reason + Act)
+    description: Combine reasoning, action, and observation in iterative loops
+    use_case: Tool-using agents, dynamic environments
+    when_to_use: Agents that need to use tools and adapt based on results
+    example: |
+      Thought: I need to check the database
+      Action: query_db(table='users')
+      Observation: Found 5 results
+      Thought: Now I should analyze these results
+
+  - name: Few-Shot Learning
+    description: Provide 1-5 examples of desired input/output pairs
+    use_case: Formatting, style consistency, specialized tasks
+    when_to_use: When you need consistent output format or specific style
+    example: |
+      Example 1:
+      Input: Create button
+      Output: <button className='btn'>Click me</button>
+
+      Example 2:
+      Input: Create input field
+      Output: <input type='text' className='input' />
+
+  - name: Role Prompting
+    description: Assign a specific expert identity to the agent
+    use_case: All agents - establishes expertise and tone
+    when_to_use: Always - sets the foundation for agent behavior
+    example: "You are a senior software architect with 15 years of experience in distributed systems"
+
+  - name: Structured Output
+    description: Define exact JSON schema or format for responses
+    use_case: API integration, data processing, consistency
+    when_to_use: When output needs to be parsed or processed programmatically
+    example: |
+      Always respond with:
+      {
+        "status": "success|error",
+        "data": {},
+        "message": ""
+      }
+
+ui_features:
+  - feature: Category Browser
+    description: Visual tiles for agent types with icons and descriptions
+    interaction: Click to explore templates in each category
+
+  - feature: Template Library
+    description: Pre-built prompt templates for common agent types
+    interaction: Select template to load into builder
+
+  - feature: Component Builder
+    description: Interactive form to add and configure prompt components
+    interaction: Toggle components on/off, fill in details for each
+
+  - feature: Live Preview
+    description: Real-time preview of generated prompt as you build
+    interaction: Auto-updates as components are added or modified
+
+  - feature: Prompt Optimizer
+    description: AI-powered suggestions to improve prompt quality
+    interaction: Click "Optimize" to get enhancement recommendations
+
+  - feature: Export Options
+    description: Copy to clipboard, download as file, or save to library
+    interaction: Multiple format options (text, markdown, JSON)
+
+  - feature: Best Practices Tips
+    description: Contextual tips and guidelines while building
+    interaction: Hover over info icons for detailed explanations
+
+  - feature: Example Gallery
+    description: Browse real-world examples from popular AI agents
+    interaction: View, customize, and use proven prompts
+
+popular_examples:
+  - name: Cline (formerly Claude Dev)
+    description: Autonomous coding agent with tool use
+    key_features:
+      - Iterative step-by-step confirmation
+      - Plan mode vs Act mode
+      - Comprehensive tool definitions
+    source: Open-source VSCode extension
+
+  - name: Vercel v0
+    description: UI generation agent for React/Next.js
+    key_features:
+      - Clear role and specialization
+      - Design system adherence
+      - Code generation standards
+    source: Vercel's AI assistant
+
+  - name: Bolt.new
+    description: Full-stack web app builder
+    key_features:
+      - Holistic planning approach
+      - Modular action sequencing
+      - Safety and context awareness
+    source: StackBlitz's AI tool
+
+  - name: Manus
+    description: General purpose agent with explicit loop
+    key_features:
+      - Defined agent loop structure
+      - Modular prompt architecture
+      - Tool selection strategy
+    source: Research project

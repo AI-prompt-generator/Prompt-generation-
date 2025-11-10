@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Prompt Generator - Build Better AI Agents</title>
+    <style>
+        :root {
+  /* Primitive Color Tokens */
+  --color-white: rgba(255, 255, 255, 1);
+  --color-black: rgba(0, 0, 0, 1);
+  --color-cream-50: rgba(252, 252, 249, 1);
+  --color-cream-100: rgba(255, 255, 253, 1);
+  --color-gray-200: rgba(245, 245, 245, 1);
+  --color-gray-300: rgba(167, 169, 169, 1);
+  --color-gray-400: rgba(119, 124, 124, 1);
+  --color-slate-500: rgba(98, 108, 113, 1);
+  --color-brown-600: rgba(94, 82, 64, 1);
+  --color-charcoal-700: rgba(31, 33, 33, 1);
+  --color-charcoal-800: rgba(38, 40, 40, 1);
+  --color-slate-900: rgba(19, 52, 59, 1);
+  --color-teal-300: rgba(50, 184, 198, 1);
+  --color-teal-400: rgba(45, 166, 178, 1);
+  --color-teal-500: rgba(33, 128, 141, 1);
+  --color-teal-600: rgba(29, 116, 128, 1);
+  --color-teal-700: rgba(26, 104, 115, 1);
+  --color-teal-800: rgba(41, 150, 161, 1);
+  --color-red-400: rgba(255, 84, 89, 1);
+  --color-red-500: rgba(192, 21, 47, 1);
+  --color-orange-400: rgba(230, 129, 97, 1);
+  --color-orange-500: rgba(168, 75, 47, 1);
+
+  /* RGB versions for opacity control */
+  --color-brown-600-rgb: 94, 82, 64;
+  --color-teal-500-rgb: 33, 128, 141;
+  --color-slate-900-rgb: 19, 52, 59;
+  --color-slate-500-rgb: 98, 108, 113;
+  --color-red-500-rgb: 192, 21, 47;
+  --color-red-400-rgb: 255, 84, 89;
+  --color-orange-500-rgb: 168, 75, 47;
+  --color-orange-400-rgb: 230, 129, 97;
+
+  /* Background color tokens (Light Mode) */
+  --color-bg-1: rgba(59, 130, 246, 0.08);
+  --color-bg-2: rgba(245, 158, 11, 0.08);
+  --color-bg-3: rgba(34, 197, 94, 0.08);
+  --color-bg-4: rgba(239, 68, 68, 0.08);
+  --color-bg-5: rgba(147, 51, 234, 0.08);
+  --color-bg-6: rgba(249, 115, 22, 0.08);
+  --color-bg-7: rgba(236, 72, 153, 0.08);
+  --color-bg-8: rgba(6, 182, 212, 0.08);
+
+  /* Semantic Color Tokens (Light Mode) */
+  --color-background: var(--color-cream-50);
+  --color-surface: var(--color-cream-100);
+  --color-text: var(--color-slate-900);
+  --color-text-secondary: var(--color-slate-500);
+  --color-primary: var(--color-teal-500);
+  --color-primary-hover: var(--color-teal-600);
+  --color-primary-active: var(--color-teal-700);
+  --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+  --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+  --color-btn-primary-text: var(--color-cream-50);
+  --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+  --color-error: var(--color-red-500);
+  --color-success: var(--color-teal-500);
+  --color-warning: var(--color-orange-500);
+  --color-info: var(--color-slate-500);
+  --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+  --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+  /* Typography */
+  --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 12px;
+  --font-size-base: 14px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 30px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 550;
+  --font-weight-bold: 600;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+
+  /* Spacing */
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-base: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+
+  /* Animation */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-gray-400-rgb: 119, 124, 124;
+    --color-teal-300-rgb: 50, 184, 198;
+    --color-gray-300-rgb: 167, 169, 169;
+    --color-gray-200-rgb: 245, 245, 245;
+
+    --color-bg-1: rgba(29, 78, 216, 0.15);
+    --color-bg-2: rgba(180, 83, 9, 0.15);
+    --color-bg-3: rgba(21, 128, 61, 0.15);
+    --color-bg-4: rgba(185, 28, 28, 0.15);
+    --color-bg-5: rgba(107, 33, 168, 0.15);
+    --color-bg-6: rgba(194, 65, 12, 0.15);
+    --color-bg-7: rgba(190, 24, 93, 0.15);
+    --color-bg-8: rgba(8, 145, 178, 0.15);
+
+    --color-background: var(--color-charcoal-700);
+    --color-surface: var(--color-charcoal-800);
+    --color-text: var(--color-gray-200);
+    --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+    --color-primary: var(--color-teal-300);
+    --color-primary-hover: var(--color-teal-400);
+    --color-primary-active: var(--color-teal-800);
+    --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+    --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+    --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+    --color-error: var(--color-red-400);
+    --color-success: var(--color-teal-300);
+    --color-warning: var(--color-orange-400);
+    --color-info: var(--color-gray-300);
+    --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+    --color-btn-primary-text: var(--color-slate-900);
+    --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+    --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+  }
+}
+
+@font-face {
+  font-family: 'FKGroteskNeue';
+  src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2') format('woff2');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: var(--font-family-base);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: var(--line-height-normal);
+    font-size: var(--font-size-base);
+}
+
+/* Navigation */
+.navbar {
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-16) var(--space-32);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.navbar-links {
+    display: flex;
+    gap: var(--space-24);
+    align-items: center;
+}
+
+.navbar-link {
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: color var(--duration-fast);
+}
+
+.navbar-link:hover {
+    color: var(--color-primary);
+}
+
+.btn {
+    padding: var(--space-12) var(--space-24);
+    border-radius: var(--radius-base);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    border: none;
+    transition: all var(--duration-fast);
+    font-size: var(--font-size-base);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-text);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+}
+
+.btn-outline:hover {
+    background-color: var(--color-secondary);
+}
+
+.btn-sm {
+    padding: var(--space-8) var(--space-16);
+    font-size: var(--font-size-sm);
+}
+
+/* Views */
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+/* Home View */
+.home-view {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-32);
+}
+
+.hero {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.hero h1 {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-16);
+    color: var(--color-text);
+}
+
+.hero p {
+    font-size: var(--font-size-xl);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-32);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-24);
+    margin-top: 60px;
+}
+
+.feature-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    text-align: center;
+}
+
+.feature-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-16);
+}
+
+.feature-card h3 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-8);
+}
+
+.feature-card p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+/* Category Browser */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--space-32);
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.page-header h2 {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-16);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-24);
+}
+
+.category-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    cursor: pointer;
+    transition: all var(--duration-normal);
+}
+
+.category-card:hover {
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.category-icon {
+    font-size: 48px;
+    margin-bottom: var(--space-16);
+}
+
+.category-card h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-12);
+}
+
+.category-card p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-20);
+}
+
+/* Templates View */
+.breadcrumb {
+    display: flex;
+    gap: var(--space-8);
+    margin-bottom: var(--space-24);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.breadcrumb a {
+    color: var(--color-primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.template-list {
+    display: grid;
+    gap: var(--space-20);
+}
+
+.template-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+}
+
+.template-card h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-12);
+}
+
+.template-card p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+}
+
+/* Builder View */
+.builder-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-24);
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-32);
+}
+
+.builder-panel {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+    height: fit-content;
+}
+
+.builder-panel h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-20);
+}
+
+.component-section {
+    margin-bottom: var(--space-24);
+    border-bottom: 1px solid var(--color-card-border-inner);
+    padding-bottom: var(--space-24);
+}
+
+.component-section:last-child {
+    border-bottom: none;
+}
+
+.component-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-12);
+}
+
+.component-header h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+}
+
+.tip-icon {
+    cursor: help;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    position: relative;
+}
+
+.component-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-12);
+}
+
+.form-control {
+    width: 100%;
+    padding: var(--space-12);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    resize: vertical;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+textarea.form-control {
+    min-height: 100px;
+}
+
+.advanced-toggle {
+    background-color: var(--color-bg-1);
+    padding: var(--space-16);
+    border-radius: var(--radius-base);
+    margin-bottom: var(--space-16);
+}
+
+.advanced-toggle h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-16);
+}
+
+.checkbox-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-12);
+    margin-bottom: var(--space-16);
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin-top: 4px;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    flex: 1;
+}
+
+.checkbox-label strong {
+    display: block;
+    margin-bottom: var(--space-8);
+}
+
+.advanced-content {
+    display: none;
+    margin-top: var(--space-12);
+}
+
+.advanced-content.visible {
+    display: block;
+}
+
+.action-buttons {
+    display: flex;
+    gap: var(--space-12);
+    flex-wrap: wrap;
+    margin-top: var(--space-24);
+}
+
+/* Preview Panel */
+.preview-panel {
+    position: sticky;
+    top: 80px;
+}
+
+.preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-16);
+}
+
+.quality-badge {
+    padding: var(--space-8) var(--space-16);
+    border-radius: var(--radius-base);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.quality-excellent {
+    background-color: var(--color-bg-3);
+    color: var(--color-success);
+}
+
+.quality-solid {
+    background-color: var(--color-bg-1);
+    color: var(--color-primary);
+}
+
+.quality-good {
+    background-color: var(--color-bg-2);
+    color: var(--color-warning);
+}
+
+.quality-needs {
+    background-color: var(--color-bg-4);
+    color: var(--color-error);
+}
+
+.preview-box {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-base);
+    padding: var(--space-16);
+    min-height: 400px;
+    max-height: 600px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    margin-bottom: var(--space-16);
+}
+
+.preview-stats {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+}
+
+.preview-actions {
+    display: flex;
+    gap: var(--space-12);
+    flex-wrap: wrap;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background-color: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: var(--space-32);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-24);
+}
+
+.modal-header h3 {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+}
+
+.best-practice-item {
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-base);
+    padding: var(--space-16);
+    margin-bottom: var(--space-16);
+}
+
+.best-practice-item h4 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-8);
+}
+
+.best-practice-item p {
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-12);
+}
+
+/* Examples View */
+.examples-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-24);
+}
+
+.example-card {
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-card-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-24);
+}
+
+.example-card h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-12);
+}
+
+.example-card p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+}
+
+.example-features {
+    list-style: none;
+    margin-bottom: var(--space-20);
+}
+
+.example-features li {
+    padding: var(--space-8) 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+.example-features li:before {
+    content: "✓ ";
+    color: var(--color-success);
+    font-weight: var(--font-weight-bold);
+}
+
+.example-actions {
+    display: flex;
+    gap: var(--space-12);
+}
+
+/* Guide View */
+.guide-tabs {
+    display: flex;
+    gap: var(--space-16);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--space-24);
+}
+
+.guide-tab {
+    padding: var(--space-12) var(--space-16);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    transition: all var(--duration-fast);
+}
+
+.guide-tab.active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+
+.guide-content {
+    display: none;
+}
+
+.guide-content.active {
+    display: block;
+}
+
+.guide-section {
+    margin-bottom: var(--space-32);
+}
+
+.guide-section h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-16);
+}
+
+.guide-section p {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-16);
+    line-height: 1.6;
+}
+
+.guide-section ul {
+    margin-left: var(--space-20);
+    margin-bottom: var(--space-16);
+}
+
+.guide-section li {
+    margin-bottom: var(--space-8);
+    color: var(--color-text-secondary);
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 80px;
+    right: var(--space-32);
+    background-color: var(--color-success);
+    color: var(--color-btn-primary-text);
+    padding: var(--space-16) var(--space-24);
+    border-radius: var(--radius-base);
+    box-shadow: var(--shadow-md);
+    z-index: 2000;
+    display: none;
+    animation: slideIn 0.3s ease-out;
+}
+
+.toast.show {
+    display: block;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .builder-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .preview-panel {
+        position: static;
+    }
+    
+    .navbar-links {
+        gap: var(--space-12);
+    }
+    
+    .navbar {
+        padding: var(--space-16);
+    }
+    
+    .hero h1 {
+        font-size: var(--font-size-3xl);
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="navbar-brand" onclick="showView('home')">AI Agent Prompt Generator</a>
+        <div class="navbar-links">
+            <a class="navbar-link" onclick="showView('home')">Home</a>
+            <a class="navbar-link" onclick="showView('categories')">Templates</a>
+            <a class="navbar-link" onclick="showView('examples')">Examples</a>
+            <a class="navbar-link" onclick="showView('guide')">Guide</a>
+            <button class="btn btn-primary btn-sm" onclick="showView('builder')">Build Prompt</button>
+        </div>
+    </nav>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Home View -->
+    <div id="home-view" class="view active">
+        <div class="home-view">
+            <div class="hero">
+                <h1>AI Agent Prompt Generator</h1>
+                <p>Build Better AI Agents with professionally-crafted prompts. Use pre-built templates or create custom prompts with best practices built-in.</p>
+                <button class="btn btn-primary" onclick="showView('categories')" style="font-size: var(--font-size-lg); padding: var(--space-16) var(--space-32);">Get Started</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Pre-built Templates</h3>
+                    <p>Start with proven templates for coding, support, research, creative, and automation agents</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Best Practices Built-in</h3>
+                    <p>Leverage industry best practices and prompting techniques with one click</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Live Preview</h3>
+                    <p>See your prompt assembled in real-time with quality scoring</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Export &amp; Save</h3>
+                    <p>Download prompts as .txt or .md files, or copy to clipboard instantly</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Categories View -->
+    <div id="categories-view" class="view">
+        <div class="container">
+            <div class="page-header">
+                <h2>Choose Your Agent Category</h2>
+                <p style="color: var(--color-text-secondary); font-size: var(--font-size-lg);">Select a category to explore specialized templates</p>
+            </div>
+            <div class="category-grid" id="categoryGrid"></div>
+        </div>
+    </div>
+
+    <!-- Templates View -->
+    <div id="templates-view" class="view">
+        <div class="container">
+            <div class="breadcrumb">
+                <a onclick="showView('home')">Home</a> / 
+                <a onclick="showView('categories')">Categories</a> / 
+                <span id="currentCategory">Templates</span>
+            </div>
+            <div class="page-header">
+                <h2 id="templateCategoryTitle">Templates</h2>
+                <p id="templateCategoryDesc" style="color: var(--color-text-secondary);"></p>
+            </div>
+            <div class="template-list" id="templateList"></div>
+            <div style="margin-top: var(--space-32); text-align: center;">
+                <button class="btn btn-outline" onclick="buildFromScratch()">Build From Scratch</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Builder View -->
+    <div id="builder-view" class="view">
+        <div class="builder-container">
+            <!-- Left Panel -->
+            <div class="builder-panel">
+                <h3>Prompt Components</h3>
+                <div id="templateInfo" style="display: none; background-color: var(--color-bg-1); padding: var(--space-16); border-radius: var(--radius-base); margin-bottom: var(--space-24);"></div>
+                
+                <!-- Essential Components -->
+                <div class="component-section">
+                    <div class="component-header">
+                        <h4>Role &amp; Persona <span class="tip-icon" title="Define the agent's identity, expertise, and personality">ℹ️</span></h4>
+                    </div>
+                    <p class="component-description">Define the agent's identity, expertise, and personality</p>
+                    <textarea class="form-control" id="rolePersona" placeholder="Example: You are v0, an expert AI coding assistant specialized in React and Next.js..."></textarea>
+                </div>
+
+                <div class="component-section">
+                    <div class="component-header">
+                        <h4>Goal &amp; Objective <span class="tip-icon" title="Specify the primary purpose and desired outcomes">ℹ️</span></h4>
+                    </div>
+                    <p class="component-description">Specify the primary purpose and desired outcomes</p>
+                    <textarea class="form-control" id="goalObjective" placeholder="Example: Your goal is to generate production-ready, accessible React components..."></textarea>
+                </div>
+
+                <div class="component-section">
+                    <div class="component-header">
+                        <h4>Instructions <span class="tip-icon" title="Clear, step-by-step operational guidelines">ℹ️</span></h4>
+                    </div>
+                    <p class="component-description">Clear, step-by-step operational guidelines</p>
+                    <textarea class="form-control" id="instructions" placeholder="Example:\n1. Analyze user request\n2. Select appropriate tools\n3. Execute and wait\n4. Submit results"></textarea>
+                </div>
+
+                <div class="component-section">
+                    <div class="component-header">
+                        <h4>Constraints &amp; Guardrails <span class="tip-icon" title="Boundaries, limitations, and safety measures">ℹ️</span></h4>
+                    </div>
+                    <p class="component-description">Boundaries, limitations, and safety measures</p>
+                    <textarea class="form-control" id="constraints" placeholder="Example: Never execute destructive operations without explicit confirmation. Always validate inputs."></textarea>
+                </div>
+
+                <!-- Advanced Components -->
+                <div class="advanced-toggle">
+                    <h4>Advanced Components</h4>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableToolDefinitions" onchange="toggleAdvanced('toolDefinitions')">
+                        <div class="checkbox-label">
+                            <strong>Tool Definitions</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Detailed specifications for available tools and APIs</span>
+                        </div>
+                    </div>
+                    <div id="toolDefinitions-content" class="advanced-content">
+                        <textarea class="form-control" id="toolDefinitions" placeholder="Example: execute_command: Use this to run CLI commands. Parameters: command (string), timeout (int)"></textarea>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableContextManagement" onchange="toggleAdvanced('contextManagement')">
+                        <div class="checkbox-label">
+                            <strong>Context Management</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">How to handle conversation history and memory</span>
+                        </div>
+                    </div>
+                    <div id="contextManagement-content" class="advanced-content">
+                        <textarea class="form-control" id="contextManagement" placeholder="Example: Maintain context across interactions, referencing previous outputs when relevant"></textarea>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableOutputFormat" onchange="toggleAdvanced('outputFormat')">
+                        <div class="checkbox-label">
+                            <strong>Output Format</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Structure and style for agent responses</span>
+                        </div>
+                    </div>
+                    <div id="outputFormat-content" class="advanced-content">
+                        <textarea class="form-control" id="outputFormat" placeholder='Example: Always return JSON with keys: status, result, next_action'></textarea>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableExamples" onchange="toggleAdvanced('examples')">
+                        <div class="checkbox-label">
+                            <strong>Examples (Few-Shot)</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">Sample inputs and expected outputs</span>
+                        </div>
+                    </div>
+                    <div id="examples-content" class="advanced-content">
+                        <textarea class="form-control" id="examples" placeholder="Example: User: Create a button\nAssistant: Here's a semantic button component..."></textarea>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableReasoningStyle" onchange="toggleAdvanced('reasoningStyle')">
+                        <div class="checkbox-label">
+                            <strong>Reasoning Style</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">How the agent should approach problem-solving</span>
+                        </div>
+                    </div>
+                    <div id="reasoningStyle-content" class="advanced-content">
+                        <textarea class="form-control" id="reasoningStyle" placeholder="Example: Use chain-of-thought reasoning: think step-by-step before responding"></textarea>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="enableErrorHandling" onchange="toggleAdvanced('errorHandling')">
+                        <div class="checkbox-label">
+                            <strong>Error Handling</strong>
+                            <span style="font-size: var(--font-size-sm); color: var(--color-text-secondary);">How to manage failures and edge cases</span>
+                        </div>
+                    </div>
+                    <div id="errorHandling-content" class="advanced-content">
+                        <textarea class="form-control" id="errorHandling" placeholder="Example: If a tool fails, explain the error clearly and suggest alternatives"></textarea>
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn-secondary btn-sm" onclick="openBestPracticesModal()">Add Best Practice</button>
+                    <button class="btn btn-secondary btn-sm" onclick="openTechniquesModal()">Add Technique</button>
+                    <button class="btn btn-outline btn-sm" onclick="clearBuilder()">Clear All</button>
+                </div>
+            </div>
+
+            <!-- Right Panel - Preview -->
+            <div class="builder-panel preview-panel">
+                <div class="preview-header">
+                    <h3>Generated Prompt</h3>
+                    <div id="qualityBadge" class="quality-badge quality-needs">0% - Needs Work</div>
+                </div>
+                <div id="previewBox" class="preview-box">Your prompt will appear here as you fill in the components...</div>
+                <div class="preview-stats">
+                    <span id="wordCount">0 words</span> • <span id="charCount">0 characters</span>
+                </div>
+                <div class="preview-actions">
+                    <button class="btn btn-primary btn-sm" onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+                    <button class="btn btn-secondary btn-sm" onclick="downloadTxt()">💾 Download .txt</button>
+                    <button class="btn btn-secondary btn-sm" onclick="downloadMd()">📄 Download .md</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Examples View -->
+    <div id="examples-view" class="view">
+        <div class="container">
+            <div class="page-header">
+                <h2>Learn from Popular AI Agents</h2>
+                <p style="color: var(--color-text-secondary);">Explore how leading tools structure their prompts</p>
+            </div>
+            <div class="examples-grid" id="examplesGrid"></div>
+        </div>
+    </div>
+
+    <!-- Guide View -->
+    <div id="guide-view" class="view">
+        <div class="container">
+            <div class="page-header">
+                <h2>Prompt Engineering Guide</h2>
+            </div>
+            <div class="guide-tabs">
+                <button class="guide-tab active" onclick="showGuideTab('getting-started')">Getting Started</button>
+                <button class="guide-tab" onclick="showGuideTab('components')">Components</button>
+                <button class="guide-tab" onclick="showGuideTab('best-practices')">Best Practices</button>
+                <button class="guide-tab" onclick="showGuideTab('techniques')">Techniques</button>
+            </div>
+            <div id="guideContent"></div>
+        </div>
+    </div>
+
+    <!-- Best Practices Modal -->
+    <div id="bestPracticesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Enhance Your Prompt</h3>
+                <button class="close-btn" onclick="closeBestPracticesModal()">×</button>
+            </div>
+            <div id="bestPracticesList"></div>
+        </div>
+    </div>
+
+    <!-- Techniques Modal -->
+    <div id="techniquesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Prompting Technique</h3>
+                <button class="close-btn" onclick="closeTechniquesModal()">×</button>
+            </div>
+            <div id="techniquesList"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
